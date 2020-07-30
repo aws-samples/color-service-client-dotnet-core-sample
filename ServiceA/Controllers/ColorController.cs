@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using ServiceA.Models;
+using ServiceA.Utility;
 
 namespace ServiceA.Controllers
 {
@@ -12,18 +9,19 @@ namespace ServiceA.Controllers
     [ApiController]
     public class ColorController : ControllerBase
     {
-        // GET: api/<ColorController>
-        [HttpGet]
-        public string Get()
+        public IOptionsSnapshot<Settings> Settings { get; }
+
+        public ColorController(IOptionsSnapshot<Settings> settings)
         {
-            return "Green";
+            this.Settings = settings;
         }
 
-        // GET api/<ColorController>/5
+        // GET: api/<ColorController>
+        [HttpGet]
+        public string Get() => this.Settings.Value.Color.OrDefaultIfBlank("Green");
+
+        // GET api/<ColorController>/Red
         [HttpGet("{color}")]
-        public string Get(string color)
-        {
-            return color;
-        }
+        public string Get(string color) => color.OrDefaultIfBlank(this.Get());
     }
 }

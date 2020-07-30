@@ -30,6 +30,9 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
+      "environmentVariables": {
+        "Settings__Color": "Magenta"
+      },
       "publishAllPorts": true
     }
   }

@@ -1,22 +1,20 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using WebUIApp.BizLogic;
 using WebUIApp.Models;
-using WebUIApp.Utility;
 
 namespace WebUIApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IOptionsSnapshot<Settings> Settings { get; }
+        private readonly ServiceAClient serviceAclient;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IOptionsSnapshot<WebUIApp.Models.Settings> settings)
+        public HomeController(ILogger<HomeController> logger, ServiceAClient serviceAclient)
         {
-            Settings = settings;
+            this.serviceAclient = serviceAclient;
             _logger = logger;
         }
 
@@ -38,22 +36,7 @@ namespace WebUIApp.Controllers
 
         public async Task<ActionResult> Color()
         {
-            string colorString = "DarkRed";
-            try
-            {
-                //using (var svcClient = new ServiceA(new Uri(this.Settings.Value.ServiceBaseUrl)))
-                //{
-                //    var colorResource = new Color(svcClient);
-                //    colorString = await colorResource.GetAsync();
-                //}
-            }
-            catch (Exception e)
-            {
-                colorString = e.Innermost().Message;
-            }
-
-            var color = new Models.Color { Value = colorString };
-
+            var color = await serviceAclient.GetColor();
             return PartialView(color);
         }
     }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebUIApp.BizLogic;
 using WebUIApp.Models;
 
 namespace WebUIApp
@@ -21,6 +22,7 @@ namespace WebUIApp
         {
             services.AddControllersWithViews();
             services.Configure<Settings>(Configuration.GetSection("Settings"));
+            services.AddScoped<ServiceAClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
-﻿using SysColor = System.Drawing.Color;
+﻿using WebUIApp.Utility;
+using SysColor = System.Drawing.Color;
 
 namespace WebUIApp.Models
 {
@@ -8,22 +9,8 @@ namespace WebUIApp.Models
 
         private SysColor SystemColor => SysColor.FromName(this.Value);
 
-        public string CssColor => ToCssColor(this.SystemColor);
+        public string CssColor => this.SystemColor.ToCssColor();
 
-        private static string ToCssColor(SysColor color) =>
-            "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
-
-        private static SysColor ToXorColor(SysColor color)
-        {
-            uint intColor = (uint)color.ToArgb();
-            uint xorWoAlpha = (intColor & 0x00FFFFFF) ^ 0xFFFFFFFF;
-            uint alpha = intColor & 0xFF000000;
-            uint xor = xorWoAlpha | alpha;
-            return SysColor.FromArgb((int)xor);
-        }
-
-        private SysColor XorColor => ToXorColor(this.SystemColor);
-
-        public string CssXorColor => ToCssColor(this.XorColor);
+        public string CssXorColor => this.SystemColor.ToXorColor().ToCssColor();
     }
 }

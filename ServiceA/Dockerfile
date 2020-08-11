@@ -16,6 +16,7 @@ FROM build AS publish
 RUN dotnet publish "ServiceA.csproj" -c Release -o /app/publish
 
 FROM base AS final
+ENV Settings__Color="Yellow"
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ServiceA.dll"]

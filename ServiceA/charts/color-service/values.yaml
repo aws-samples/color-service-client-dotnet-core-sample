@@ -4,7 +4,8 @@
 fullnameOverride: color-service
 replicaCount: 1
 image:
-  repository: 123456789012.dkr.ecr.us-east-2.amazonaws.com/color-service
+  repoBase: 123456789012.dkr.ecr.us-east-2.amazonaws.com
+  repository: color-service
   tag: latest
   pullPolicy: IfNotPresent
 imagePullSecrets: []

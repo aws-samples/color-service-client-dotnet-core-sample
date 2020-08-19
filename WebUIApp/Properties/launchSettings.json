@@ -16,7 +16,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "Settings__ServiceBaseUrl": "http://localhost:32773/",
+        "Settings__ServiceBaseUrl": "http://localhost:5001/",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }
@@ -25,7 +25,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "Settings__ServiceBaseUrl": "http://localhost:32773/",
+        "Settings__ServiceBaseUrl": "http://localhost:5001/",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       },

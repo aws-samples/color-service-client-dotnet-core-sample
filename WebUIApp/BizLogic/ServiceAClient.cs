@@ -23,6 +23,8 @@ namespace WebUIApp.BizLogic
             {
                 var restRequest = new RestRequest("color");
                 colorString = await this.restClient.GetAsync<string>(restRequest);
+                if (string.IsNullOrWhiteSpace(colorString))
+                    colorString = "Blank Color returned by Color service.";
             }
             catch (Exception e)
             {

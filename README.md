@@ -5,7 +5,7 @@ one REST service - in a single VS solution.
 
 [REST service](./ServiceA/Controllers/ColorController.cs) returns configurable color name.
 
-[Client app](./WebUiApp/Views/Home/Index.cshtml) calls the service at a configurable endpoint, when a link on a page is 
+[Client app](./WebUIApp/Views/Home/Index.cshtml) calls the service at a configurable endpoint, when a link on a page is 
 clicked.
 
 These duo of samples is useful for demonstrating different containerization-

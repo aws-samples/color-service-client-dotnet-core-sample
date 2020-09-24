@@ -4,24 +4,24 @@ service:
   type: ClusterIP
   port: 80
   portName: # http
-  targetPort:
-  selectorLabels: # required
+  targetPort: # specify if different from service port
+  selectorLabels: # required lable(s) shared by application pods of different versions
     app: color-service
 
 appMesh:
   enabled: true
-  outsideTrafficAllowed: true # change to true if this Canary needs to be accessible from outside the mesh
+  outsideTrafficAllowed: false # change to true if this Canary needs to be accessible from outside the mesh
   vRouterListenerProtocol: http
-  gatewayRouteMatchPrefix: # Supply override here, otherwise it's "/service-name"
+  gatewayRouteMatchPrefix: # Supply an override here, otherwise it's "/service-name"
 
   targets:  # Uncomment snippet below to set route(s) to your existing back-end app Virtual Node
-    - vNodeName: color-service-v1
-      weight: 4
-    - vNodeName: color-service-v2
-      weight: 1
+   - vNodeName: color-service-v1
+     weight: 4
+   - vNodeName: color-service-v2
+     weight: 1
 
 ingress:
-  enabled: false
+  enabled: false 
   cnameHost: # 192-168-1-10.nip.io # A hostname to which service name can prepended, like "service-name.192-168-1-10.nip.io"
   path: /*
   # hosts:

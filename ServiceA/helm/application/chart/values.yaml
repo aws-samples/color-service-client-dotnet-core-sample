@@ -4,9 +4,9 @@
 replicaCount: 1
 # fullnameOverride: your-main-resource-name 
 image:
-  repository: 444039259723.dkr.ecr.us-east-2.amazonaws.com/color-service
-  tag: green
-  pullPolicy: IfNotPresent # Change to IfNotPresent if image tag ^^ is immutable
+  repository: 123456789012.dkr.ecr.us-east-2.amazonaws.com/color-service
+  tag: latest
+  pullPolicy: Always # Change to IfNotPresent if image tag ^^ is immutable
 imagePullSecrets: []
   # Optionally specify an array of imagePullSecrets.
   # Secrets must be manually created in the namespace.
@@ -22,16 +22,16 @@ deployment:
   containerPort: 80
 
 backend:
-  envAddresses: # These entries will be turned into environment variables looking like "Settings_ServiceBaseUrl: http://color-canary/" or "Settings_ServiceBaseUrl: http://color-canary.namespace.svc.clud.local/"
-    # Settings_ServiceBaseUrl: color-canary
+  envAddresses: # These entries will be turned into environment variables looking like "Settings_ServiceBaseUrl: http://color-canary/" or "Settings_ServiceBaseUrl: http://color-canary.namespace.svc.cluster.local/"
+    # Settings__ServiceBaseUrl: color-canary
 
 probes:
   enabled: false
 
 appMesh:
   enabled: true
-  outsideTrafficAllowed: true
-  fargatePodServiceAccount: # envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
+  outsideTrafficAllowed: false
+  fargatePodServiceAccount: envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
   gatewayRouteMatchPrefix: # Supply override here, otherwise it's "/service-name"
 
   healthCheck:

@@ -4,7 +4,7 @@
 replicaCount: 1
 # fullnameOverride: your-main-resource-name 
 image:
-  repository: 444039259723.dkr.ecr.us-east-2.amazonaws.com/color-client
+  repository: 123456789012.dkr.ecr.us-east-2.amazonaws.com/color-client
   tag: latest
   pullPolicy: Always # Change to IfNotPresent if image tag ^^ is immutable
 imagePullSecrets: []
@@ -31,7 +31,7 @@ probes:
 appMesh:
   enabled: true
   outsideTrafficAllowed: true
-  fargatePodServiceAccount: # envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
+  fargatePodServiceAccount: envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
   gatewayRouteMatchPrefix: / # Supply override here, otherwise it's "/service-name"
 
   healthCheck:
@@ -43,7 +43,7 @@ appMesh:
     unhealthyThreshold: 2
 
 env:
-  ASPNETCORE_ENVIRONMENT: Development
+  # ASPNETCORE_ENVIRONMENT: Development
   # Settings__Color: red
 
 ingress:

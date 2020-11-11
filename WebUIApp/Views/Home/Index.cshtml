@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">REST Client App</h1>
+    <p>
+        Click the link below to invoke RESTful service returning a color.
+    </p>
+    <p><a class="btn btn-default" id="call-link">Invoke Service</a></p>
+    <div id="svc-call-results">(Empty)</div>
+</div>
+
+<script>
+    var url = '@Url.Action("color")';
+    $('#call-link').click(function() {
+        $('#svc-call-results').load(url);
+        //$('#svc-call-results').innerHTML = url;
+    });
+</script>

@@ -12,3 +12,10 @@ These duo of samples is useful for demonstrating different containerization-
 related use cases, like deploying applications to Kubernetes and to service
 meshes, to developers with .NET background.
 
+## Security
+
+See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+
+## License
+
+This library is licensed under the MIT-0 License. See the [LICENSE](./LICENSE) file.

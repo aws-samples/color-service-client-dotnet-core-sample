@@ -1,7 +1,7 @@
-﻿using WebUIApp.Utility;
+﻿using WebUIColorClient.Utility;
 using SysColor = System.Drawing.Color;
 
-namespace WebUIApp.Models
+namespace WebUIColorClient.Models
 {
     public class Color
     {

@@ -2,19 +2,19 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using WebUIApp.BizLogic;
-using WebUIApp.Models;
+using WebUIColorClient.Models;
+using WebUIColorClient.BizLogic;
 
-namespace WebUIApp.Controllers
+namespace WebUIColorClient.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ServiceAClient serviceAclient;
+        private readonly ColorServiceClient _colorServiceClient;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, ServiceAClient serviceAclient)
+        public HomeController(ILogger<HomeController> logger, ColorServiceClient colorServiceClient)
         {
-            this.serviceAclient = serviceAclient;
+            this._colorServiceClient = colorServiceClient;
             _logger = logger;
         }
 
@@ -36,7 +36,7 @@ namespace WebUIApp.Controllers
 
         public async Task<ActionResult> Color()
         {
-            var color = await serviceAclient.GetColor();
+            var color = await _colorServiceClient.GetColor();
             return PartialView(color);
         }
     }

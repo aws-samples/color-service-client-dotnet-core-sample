@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace WebUIApp.Utility
+namespace WebUIColorClient.Utility
 {
     public static class Extensions
     {

@@ -2,7 +2,7 @@ using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace WebUIApp
+namespace WebUIColorClient
 {
     public class Program
     {

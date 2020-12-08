@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -7,6 +8,7 @@ namespace WebUIApp
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine($".NET CLR version: {Environment.Version}");
             CreateHostBuilder(args).Build().Run();
         }
 

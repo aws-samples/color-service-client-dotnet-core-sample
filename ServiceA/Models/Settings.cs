@@ -1,4 +1,4 @@
-﻿namespace ServiceA.Models
+﻿namespace ColorService.Models
 {
     public class Settings
     {

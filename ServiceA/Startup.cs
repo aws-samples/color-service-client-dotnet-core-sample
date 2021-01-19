@@ -1,11 +1,11 @@
+using ColorService.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ServiceA.Models;
 
-namespace ServiceA
+namespace ColorService
 {
     public class Startup
     {

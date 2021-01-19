@@ -2,16 +2,16 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using RestSharp;
-using WebUIApp.Models;
-using WebUIApp.Utility;
+using WebUIColorClient.Models;
+using WebUIColorClient.Utility;
 
-namespace WebUIApp.BizLogic
+namespace WebUIColorClient.BizLogic
 {
-    public class ServiceAClient
+    public class ColorServiceClient
     {
         private readonly RestClient restClient;
 
-        public ServiceAClient(IOptionsSnapshot<Settings> settings)
+        public ColorServiceClient(IOptionsSnapshot<Settings> settings)
         {
             this.restClient = new RestClient(settings.Value.ServiceBaseUrl);
         }

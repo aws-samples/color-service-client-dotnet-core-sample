@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace ServiceA.Controllers
+namespace ColorService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -15,6 +14,7 @@ namespace ServiceA.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        // ReSharper disable once NotAccessedField.Local
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)

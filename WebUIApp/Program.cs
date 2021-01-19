@@ -1,12 +1,14 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace WebUIApp
+namespace WebUIColorClient
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine($".NET CLR version: {Environment.Version}");
             CreateHostBuilder(args).Build().Run();
         }
 

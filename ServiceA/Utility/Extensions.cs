@@ -1,4 +1,4 @@
-﻿namespace ServiceA.Utility
+﻿namespace ColorService.Utility
 {
     public static class Extensions
     {

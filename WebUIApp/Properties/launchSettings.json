@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost/WebUIApp",
+      "applicationUrl": "http://localhost/WebUIColorClient",
       "sslPort": 0
     },
     "iisExpress": {
@@ -21,7 +21,7 @@
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       }
     },
-    "WebUIApp": {
+    "WebUIColorClient": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

@@ -1,6 +1,6 @@
 using System;
 
-namespace ServiceA
+namespace ColorService
 {
     public class WeatherForecast
     {

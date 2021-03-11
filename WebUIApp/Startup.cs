@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WebUIApp.BizLogic;
-using WebUIApp.Models;
+using WebUIColorClient.BizLogic;
+using WebUIColorClient.Models;
 
-namespace WebUIApp
+namespace WebUIColorClient
 {
     public class Startup
     {
@@ -22,7 +22,7 @@ namespace WebUIApp
         {
             services.AddControllersWithViews();
             services.Configure<Settings>(Configuration.GetSection("Settings"));
-            services.AddScoped<ServiceAClient>();
+            services.AddScoped<ColorServiceClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

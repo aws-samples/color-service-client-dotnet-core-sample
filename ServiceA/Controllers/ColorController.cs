@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ColorService.Models;
+using ColorService.Utility;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using ServiceA.Models;
-using ServiceA.Utility;
 
-namespace ServiceA.Controllers
+namespace ColorService.Controllers
 {
     [Route("[controller]")]
     [ApiController]

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceA", "ServiceA\ServiceA.csproj", "{CA15A1BE-20AB-4153-95E1-12B92BC7CFF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorService", "ServiceA\ColorService.csproj", "{CA15A1BE-20AB-4153-95E1-12B92BC7CFF9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUIApp", "WebUIApp\WebUIApp.csproj", "{55052BFB-D555-4FFC-8C90-E2F2669597CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUIColorClient", "WebUIApp\WebUIColorClient.csproj", "{55052BFB-D555-4FFC-8C90-E2F2669597CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD7BECAE-C38C-4937-AC7F-47C7DC895BD0}"
 	ProjectSection(SolutionItems) = preProject

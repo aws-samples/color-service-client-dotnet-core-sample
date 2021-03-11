@@ -1,4 +1,4 @@
-﻿namespace WebUIApp.Models
+﻿namespace WebUIColorClient.Models
 {
     public class Settings
     {

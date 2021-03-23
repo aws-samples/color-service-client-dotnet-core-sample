@@ -9,7 +9,7 @@ service:
     app: color-service
 
 appMesh:
-  enabled: true
+  enabled: false
   outsideTrafficAllowed: false # change to true if this Canary needs to be accessible from outside the mesh
   vRouterListenerProtocol: http
   gatewayRouteMatchPrefix: # Supply an override here, otherwise it's "/service-name"

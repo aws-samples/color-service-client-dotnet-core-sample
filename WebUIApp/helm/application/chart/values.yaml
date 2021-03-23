@@ -15,7 +15,7 @@ imagePullSecrets: []
   # This uses credentials from secret "myRegistryKeySecretName".
   # - name: myRegistryKeySecretName
 service:
-  type: ClusterIP
+  type: NodePort # NodePort for regular nodes to be accessed by LB Ingress, ClusterIP for everything else.
   port: 80
 
 deployment:
@@ -23,15 +23,15 @@ deployment:
 
 backend:
   envAddresses: # These entries will be turned into environment variables looking like "Settings_ServiceBaseUrl: http://color-canary/" or "Settings_ServiceBaseUrl: http://color-canary.namespace.svc.cluster.local/"
-    Settings__ServiceBaseUrl: color-canary
+    Settings__ServiceBaseUrl: color
 
 probes:
   enabled: false
 
 appMesh:
-  enabled: true
+  enabled: false
   outsideTrafficAllowed: true
-  fargatePodServiceAccount: envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
+  fargatePodServiceAccount: #envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
   gatewayRouteMatchPrefix: / # Supply override here, otherwise it's "/service-name"
 
   healthCheck:
@@ -47,7 +47,7 @@ env:
   # Settings__Color: red
 
 ingress:
-  enabled: false
+  enabled: true
   cnameHost: # 192-168-1-10.nip.io # A hostname to which service name can prepended, like "service-name.192-168-1-10.nip.io"
   path: /*
   # hosts:
@@ -61,7 +61,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/target-type: instance
 
 secrets: {}
   # Optionally specify a set of secret objects whose values
@@ -87,6 +87,8 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 nodeSelector: {}
+  #kubernetes.io/os: linux
+  #kubernetes.io/arch: arm64
 
 tolerations: []
 

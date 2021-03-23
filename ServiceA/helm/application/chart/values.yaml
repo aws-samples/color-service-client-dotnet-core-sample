@@ -29,9 +29,9 @@ probes:
   enabled: false
 
 appMesh:
-  enabled: true
+  enabled: false
   outsideTrafficAllowed: false
-  fargatePodServiceAccount: envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
+  fargatePodServiceAccount: #envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
   gatewayRouteMatchPrefix: # Supply override here, otherwise it's "/service-name"
 
   healthCheck:
@@ -44,7 +44,7 @@ appMesh:
 
 env:
   # ASPNETCORE_ENVIRONMENT: Development
-  # Settings__Color: red
+  Settings__Color: Green
 
 ingress:
   enabled: false
@@ -61,7 +61,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/target-type: instance
 
 secrets: {}
   # Optionally specify a set of secret objects whose values
@@ -87,6 +87,8 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 nodeSelector: {}
+  #kubernetes.io/os: linux
+  #kubernetes.io/arch: amd64
 
 tolerations: []
 

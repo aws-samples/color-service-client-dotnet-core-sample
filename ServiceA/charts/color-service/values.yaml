@@ -1,12 +1,12 @@
 # Default values for color-service.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-fullnameOverride: color-service
+#fullnameOverride: color-service
 replicaCount: 1
 image:
-  repository: color-service
-  tag: stable
-  pullPolicy: IfNotPresent
+  repository: 444039259723.dkr.ecr.us-east-2.amazonaws.com/color-service
+  tag: latest
+  pullPolicy: Always
 imagePullSecrets: []
   # Optionally specify an array of imagePullSecrets.
   # Secrets must be manually created in the namespace.
@@ -20,6 +20,9 @@ service:
 
 deployment:
   containerPort: 80
+
+env:
+  Settings__Color: Green
 
 probes:
   enabled: false

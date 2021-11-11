@@ -1,12 +1,12 @@
 # Default values for color-client.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-fullnameOverride: color-client
+#fullnameOverride: color-client
 replicaCount: 1
 image:
-  repository: color-client
-  tag: stable
-  pullPolicy: IfNotPresent
+  repository: 444039259723.dkr.ecr.us-east-2.amazonaws.com/color-client
+  tag: latest
+  pullPolicy: Always
 imagePullSecrets: []
   # Optionally specify an array of imagePullSecrets.
   # Secrets must be manually created in the namespace.
@@ -18,6 +18,9 @@ service:
   type: ClusterIP
   port: 80
 
+env:
+  Settings__ServiceBaseUrl: http://color/
+
 deployment:
   containerPort: 80
 
@@ -26,9 +29,12 @@ probes:
 
 ingress:
   enabled: false
-  annotations: {}
+  annotations: 
     # kubernetes.io/tls-acme: "true"
-  path: /
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
+  path: /*
   # hosts:
   #   - chart-example.local
   tls: []

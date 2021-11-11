@@ -2,6 +2,7 @@
 {{- $fullName := include "color-client.fullname" . -}}
 {{- $servicePort := .Values.service.port -}}
 {{- $ingressPath := .Values.ingress.path -}}
+{{- $defaultIngressPath := printf "/%s/*" $fullName -}}
 {{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
 {{- else -}}
@@ -31,13 +32,30 @@ spec:
   {{- end }}
 {{- end }}
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ . }}
+  {{- if .Values.ingress.cnameHost }}
+    - host: {{ printf "%s.%s" $fullName .Values.ingress.cnameHost }}
       http:
         paths:
           - path: {{ $ingressPath }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: http
+              servicePort: {{ .Values.service.port | default 80 }}
+  {{- else if .Values.ingress.hosts }}
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: {{ $ingressPath | default $defaultIngressPath }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: {{ .Values.service.port | default 80 }}
+  {{- end }}
+  {{- else }}
+    - http:
+        paths:
+          - path: {{ $ingressPath | default $defaultIngressPath }}
+            backend:
+              serviceName: {{ $fullName }}
+              servicePort: {{ .Values.service.port | default 80 }}
   {{- end }}
 {{- end }}

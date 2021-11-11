@@ -43,6 +43,10 @@ spec:
               port: http
           {{- end }}
           env:
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key }}
+              value: {{ $value }}
+            {{- end }}
             {{- $root := . }}
             {{- range $ref, $values := .Values.secrets }}
             {{- range $key, $value := $values }}

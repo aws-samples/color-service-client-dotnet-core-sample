@@ -4,7 +4,7 @@
 #fullnameOverride: color-client
 replicaCount: 1
 image:
-  repository: 444039259723.dkr.ecr.us-east-2.amazonaws.com/color-client
+  repository: 123456789012.dkr.ecr.us-east-2.amazonaws.com/color-client
   tag: latest
   pullPolicy: Always
 imagePullSecrets: []
@@ -15,7 +15,7 @@ imagePullSecrets: []
   # This uses credentials from secret "myRegistryKeySecretName".
   # - name: myRegistryKeySecretName
 service:
-  type: NodePort
+  type: ClusterIP
   port: 80
 
 env:
@@ -26,6 +26,10 @@ deployment:
 
 probes:
   enabled: false
+
+istio:
+    enabled: false # set to true if the target namespace is part of an Istio service mesh
+    ingressHostname: "" # must be specified for ingress to be enabled
 
 ingress:
   enabled: false # Before setting to true, install AWS LB Controller from https://github.com/aws-samples/eks-powershell-shortcuts/blob/main/src/ALB-ingress-controller-installer.ps1

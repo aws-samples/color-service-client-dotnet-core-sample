@@ -1,0 +1,32 @@
+#fullnameOverride: canary 
+service:
+  type: ClusterIP
+  port: 80
+  portName: # http
+  targetPort: # specify if different from service port
+  selectorLabels: # required lable(s) shared by application pods of different versions
+    app: color-client
+
+istio:
+  enabled: false # set to true if the target namespace is part of an Istio service mesh
+  ingressHostname: "" # must be specified to enable Istio gateway based ingress
+  destinations:  
+   - release: color-client-v1
+     weight: 100
+
+ingress:
+  enabled: false 
+  cnameHost: # 192-168-1-10.nip.io # A hostname to which service name can prepended, like "service-name.192-168-1-10.nip.io"
+  path: /*
+  # hosts:
+  #   - chart-example.local
+  tls: []
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+
+  annotations:
+    # kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance # use "ip" with Fargate

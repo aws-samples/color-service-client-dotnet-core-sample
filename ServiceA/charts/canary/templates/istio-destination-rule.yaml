@@ -1,0 +1,17 @@
+{{- if .Values.istio.enabled -}}
+{{- $fullName := include "app.fullname" . -}}
+{{- $selectors := .Values.service.selectorLabels -}}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ $fullName }}
+spec:
+  host: {{ $fullName }}
+  subsets:
+  {{- range required "At least one istio destination has to be specified" .Values.istio.destinations }}
+  - name: {{ .release }}
+    labels:
+      {{ toYaml $selectors }}
+      release: {{ .release }}
+  {{- end }}
+{{- end }}

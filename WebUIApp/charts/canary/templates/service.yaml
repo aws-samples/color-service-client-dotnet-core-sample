@@ -11,9 +11,14 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      {{- if .Values.service.targetPort }}
+      targetPort: {{ .Values.service.targetPort }}
+      {{- end }}
+      {{- if .Values.service.portName }}
+      name: {{ .Values.service.portName }}
+      {{- end }}
       protocol: TCP
-      name: http
   selector:
-    app: {{ template "app.name" . }}
-    release: {{ .Release.Name }}
+    {{- with required "Valid 'selectors' for the Service are required" .Values.service.selectorLabels }}
+    {{ toYaml .  }}
+    {{- end }}

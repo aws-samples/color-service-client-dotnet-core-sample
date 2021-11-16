@@ -1,0 +1,19 @@
+{{- if .Values.istio.enabled -}}
+{{- $fullName := include "app.fullname" . -}}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  hosts:
+  - "{{ $fullName }}"
+  http:
+  - route:
+    - destination:
+        host: {{ $fullName }}
+{{- end }}

@@ -1,8 +1,7 @@
-{{- if .Values.ingress.enabled -}}
-{{- $fullName := include "color-client.fullname" . -}}
+{{- if and (.Values.ingress.enabled) (not .Values.istio.ingressHostName) -}}
+{{- $fullName := include "app.fullname" . -}}
 {{- $servicePort := .Values.service.port -}}
 {{- $ingressPath := .Values.ingress.path -}}
-{{- $defaultIngressPath := printf "/%s/*" $fullName -}}
 {{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
 {{- else -}}
@@ -12,8 +11,8 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "color-client.name" . }}
-    chart: {{ template "color-client.chart" . }}
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 {{- with .Values.ingress.annotations }}
@@ -32,30 +31,13 @@ spec:
   {{- end }}
 {{- end }}
   rules:
-  {{- if .Values.ingress.cnameHost }}
-    - host: {{ printf "%s.%s" $fullName .Values.ingress.cnameHost }}
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
       http:
         paths:
           - path: {{ $ingressPath }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: {{ .Values.service.port | default 80 }}
-  {{- else if .Values.ingress.hosts }}
-  {{- range .Values.ingress.hosts }}
-    - host: {{ . }}
-      http:
-        paths:
-          - path: {{ $ingressPath | default $defaultIngressPath }}
-            backend:
-              serviceName: {{ $fullName }}
-              servicePort: {{ .Values.service.port | default 80 }}
-  {{- end }}
-  {{- else }}
-    - http:
-        paths:
-          - path: {{ $ingressPath | default $defaultIngressPath }}
-            backend:
-              serviceName: {{ $fullName }}
-              servicePort: {{ .Values.service.port | default 80 }}
+              servicePort: http
   {{- end }}
 {{- end }}

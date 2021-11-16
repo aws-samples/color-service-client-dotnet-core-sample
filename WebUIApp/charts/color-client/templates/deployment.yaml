@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "color-client.fullname" . }}
+  name: {{ template "app.fullname" . }}
   labels:
-    app: {{ template "color-client.name" . }}
-    chart: {{ template "color-client.chart" . }}
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
     draft: {{ .Values.draft | default "draft-app" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -13,12 +13,12 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "color-client.name" . }}
+      app: {{ template "app.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "color-client.name" . }}
+        app: {{ template "app.name" . }}
         draft: {{ .Values.draft | default "draft-app" }}
         release: {{ .Release.Name }}
       annotations:
@@ -53,7 +53,7 @@ spec:
             - name: {{ $ref }}_{{ $key }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "color-client.fullname" $root }}-{{ $ref | lower }}
+                  name: {{ template "app.fullname" $root }}-{{ $ref | lower }}
                   key: {{ $key }}
             {{- end }}
             {{- end }}

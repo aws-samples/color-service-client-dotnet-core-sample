@@ -1,0 +1,46 @@
+{{- if and (.Values.istio.enabled) (.Values.istio.ingressHostName) -}}
+{{- $fullName := include "app.fullname" . -}}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ $fullName }} 
+  labels:
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "{{ $fullName }}.{{ .Values.istio.ingressHostName }}"
+    - "*.{{ $fullName }}.{{ .Values.istio.ingressHostName }}"
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ $fullName }}-ingress
+  labels:
+    app: {{ template "app.name" . }}
+    chart: {{ template "app.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  hosts:
+  - "{{ $fullName }}.{{ .Values.istio.ingressHostName }}"
+  gateways:
+  - {{ $fullName }}
+  http:
+  - route:
+  {{- range required "At least one istio destination has to be specified" .Values.istio.destinations }}
+    - destination:
+        host: {{ $fullName }}
+        subset: {{ .release }}
+      weight: {{ .weight }}
+  {{- end }}
+{{- end }}

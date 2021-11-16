@@ -15,7 +15,7 @@ imagePullSecrets: []
   # This uses credentials from secret "myRegistryKeySecretName".
   # - name: myRegistryKeySecretName
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
 
 env:
@@ -28,12 +28,12 @@ probes:
   enabled: false
 
 ingress:
-  enabled: false
+  enabled: false # Before setting to true, install AWS LB Controller from https://github.com/aws-samples/eks-powershell-shortcuts/blob/main/src/ALB-ingress-controller-installer.ps1
   annotations: 
     # kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: instance
+    alb.ingress.kubernetes.io/target-type: instance # use ip for Fargate
   path: /*
   # hosts:
   #   - chart-example.local

@@ -28,7 +28,7 @@ probes:
   enabled: false
 
 istio:
-  enabled: false # set to true if the target namespace is part of an Istio service mesh
+  enabled: true # set to true if the target namespace is part of an Istio service mesh
   ingressHostname: "" # must be specified for ingress to be enabled
 
 ingress:

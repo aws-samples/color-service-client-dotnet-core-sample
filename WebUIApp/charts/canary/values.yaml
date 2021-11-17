@@ -8,7 +8,7 @@ service:
     app: color-client
 
 istio:
-  enabled: false # set to true if the target namespace is part of an Istio service mesh
+  enabled: true # set to true if the target namespace is part of an Istio service mesh
   ingressHostname: "" # must be specified to enable Istio gateway based ingress
   destinations:  
    - release: color-client-v1
